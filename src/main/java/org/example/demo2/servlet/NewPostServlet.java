@@ -1,6 +1,7 @@
 package org.example.demo2.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.example.demo2.model.Post;
 import org.example.demo2.model.User;
 import org.example.demo2.repository.PostRepository;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 @WebServlet(value = "/newpost")
 public class NewPostServlet extends HttpServlet {
   private PostRepository postRepository;
@@ -34,8 +36,8 @@ public class NewPostServlet extends HttpServlet {
     Post post = objectMapper.readValue(req.getReader(), Post.class);
     User user = (User) req.getSession().getAttribute("user");
 
-    //    log.info("Received post Title: {}", post.getTitle());
-    //    log.info("Received post Content: {}", post.getContent());
+    log.info("Received post Title: {}", post.getTitle());
+    log.info("Received post Content: {}", post.getContent());
 
     postRepository.savePost(user, post.getTitle(), post.getContent());
 
