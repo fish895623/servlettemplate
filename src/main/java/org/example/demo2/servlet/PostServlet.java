@@ -1,17 +1,15 @@
 package org.example.demo2.servlet;
 
+import org.example.demo2.repository.PostRepository;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
-import org.example.demo2.repository.PostRepository;
-
 import java.io.IOException;
 
-@Slf4j
 @WebServlet(value = "/posts")
 public class PostServlet extends HttpServlet {
   PostRepository postRepository;

@@ -34,7 +34,7 @@
     </script>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<jsp:include page="header.jsp"/>
 <main>
     <div class="container">
         <h1>New Posts</h1>

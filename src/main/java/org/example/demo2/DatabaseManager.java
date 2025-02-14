@@ -1,8 +1,5 @@
 package org.example.demo2;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -17,7 +14,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
   public class DatabaseManager {
-    private static final Logger log = LoggerFactory.getLogger(DatabaseManager.class);
     private static DatabaseManager instance;
 
     static {
@@ -59,9 +55,9 @@ import java.util.stream.Stream;
           if (conn.createStatement()
               .executeQuery("SELECT * FROM migration WHERE name = '" + path.getFileName() + "'")
               .next()) {
-            log.info("Migration already executed, skipping");
+            //            log("Migration already executed, skipping");
           } else {
-            log.info("Executing migration: {}", path.getFileName());
+            //            log.info("Executing migration: {}", path.getFileName());
 
             // execute migration
             conn.createStatement().executeUpdate(sql);

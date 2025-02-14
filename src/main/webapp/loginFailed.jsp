@@ -7,7 +7,7 @@
     <t:bootstrap/>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<jsp:include page="header.jsp"/>
 <main>
     <div class="container">
         <h1>Login Failed</h1>
