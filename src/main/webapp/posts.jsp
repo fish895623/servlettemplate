@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="org.example.demo2.model.User" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<% User user = (User) session.getAttribute("user"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +16,10 @@
 <main>
     <div class="container">
         <h1>Posts</h1>
+        <% if (user == null || session.getAttribute("user").equals("false")) {%>
+        <% } else { %>
         <button class="btn btn-primary" onclick="window.location.href='newpost.jsp'">New Post</button>
+        <% } %>
         <table class="table">
             <thead>
             <tr>

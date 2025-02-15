@@ -11,9 +11,6 @@
 <jsp:include page="header.jsp"/>
 <main>
     <div class="container">
-        <div>
-            <a href="posts">Hello</a>
-        </div>
     </div>
 </main>
 </body>

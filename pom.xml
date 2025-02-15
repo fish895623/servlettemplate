@@ -93,8 +93,8 @@
                 <artifactId>tomcat-maven-plugin</artifactId>
                 <version>1.1</version>
                 <configuration>
-                    <url>http://localhost:8080/manager/text</url>
-                    <server>TomcatServer</server>
+                    <url>http://oreopie.ipdisk.co.kr:8080/manager/text</url>
+                    <server>RemoteTomcatServer</server>
                     <path>/t2</path>
                 </configuration>
             </plugin>

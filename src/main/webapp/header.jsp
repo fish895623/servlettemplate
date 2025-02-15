@@ -14,6 +14,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="posts">Posts</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
@@ -35,8 +38,7 @@
                         <% } %>
                     </li>
                     <li class="nav-item">
-                        <% if (user == null || session.getAttribute("user")
-                                .equals("false")) {%>
+                        <% if (user == null || session.getAttribute("user").equals("false")) {%>
                         <div>
                             <a class="nav-link" href="login">Login</a>
                         </div>
