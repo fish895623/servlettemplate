@@ -18,7 +18,7 @@
         <h1>Posts</h1>
         <% if (user == null || session.getAttribute("user").equals("false")) {%>
         <% } else { %>
-        <button class="btn btn-primary" onclick="window.location.href='newpost.jsp'">New Post</button>
+        <button class="btn btn-primary" onclick="window.location.href='newpost'">New Post</button>
         <% } %>
         <table class="table">
             <thead>
