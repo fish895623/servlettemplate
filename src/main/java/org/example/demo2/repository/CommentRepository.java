@@ -25,7 +25,8 @@ public class CommentRepository {
           """);
       preparedStatement.setLong(1, comment.getPostId());
       preparedStatement.setString(2, comment.getContent());
-      preparedStatement.setLong(3, comment.getAuthor_id());
+      preparedStatement.setLong(3, comment.getAuthorId());
+
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
       throw new RuntimeException(e);
@@ -56,14 +57,9 @@ public class CommentRepository {
 
     try {
       while (resultSet.next()) {
-        var d = CommentDAO.builder()
-            .id(resultSet.getLong("id"))
-            .author_id(resultSet.getLong("author_id"))
-            .authorName(resultSet.getString("author_name"))
-            .postId(resultSet.getLong("post_id"))
-            .content(resultSet.getString("content"))
-            .createdAt(resultSet.getTimestamp("created_at"))
-            .build();
+        var d = CommentDAO.builder().id(resultSet.getLong("id")).author_id(resultSet.getLong("author_id"))
+            .authorName(resultSet.getString("author_name")).postId(resultSet.getLong("post_id"))
+            .content(resultSet.getString("content")).createdAt(resultSet.getTimestamp("created_at")).build();
         data.add(d);
       }
     } catch (SQLException e) {

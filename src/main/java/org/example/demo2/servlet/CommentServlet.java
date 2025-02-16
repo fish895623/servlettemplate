@@ -32,9 +32,9 @@ public class CommentServlet extends HttpServlet {
 
     User user = (User) req.getSession().getAttribute("user");
 
-    comment.setAuthor_id(user.getId());
+    comment.setAuthorId(user.getId());
 
-    System.out.println("Received comment: " + comment.getContent() + " from user: " + user.getId());
+    System.out.println(objectMapper.toString());
 
 
     try {
