@@ -12,7 +12,7 @@
             event.preventDefault();
             const title = document.getElementById("title").value;
             const content = document.getElementById("content").value;
-            fetch("<%=request.getContextPath()%>/comment", {
+            fetch("<%=request.getContextPath()%>/comments", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
