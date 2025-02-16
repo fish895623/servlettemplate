@@ -30,8 +30,8 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log("Success: ", data);
-                    if (data.success === 'ok') {
-                        location.reload();
+                    if (data.status === 'ok') {
+                        location.reload()
                     }
                 })
                 .catch((error) => {
