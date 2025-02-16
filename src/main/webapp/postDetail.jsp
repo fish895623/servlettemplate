@@ -14,6 +14,10 @@
     <title>JSP - Hello World</title>
     <t:bootstrap/>
     <script>
+        function replyButtonClicked(event) {
+            const commentId = event.target.getAttribute("data-comment-id");
+            console.log("Reply button clicked: ", commentId);
+        }
         function submitButtonClicked(event) {
             event.preventDefault();
             const content = document.getElementById("content").value;
@@ -82,6 +86,16 @@
                     </h6>
                     <p class="text-muted small">${comment.createdAt}</p>
                     <p class="card-text">${comment.content}</p>
+
+                    <% if (user == null || session.getAttribute("user").equals("false")) {%>
+                    <% } else { %>
+                    <button type="button"
+                            class="btn btn-secondary btn-sm"
+                            data-comment-id="${comment.id}"
+                            onclick="replyButtonClicked(event)">
+                        Reply
+                    </button>
+                    <% } %>
                 </div>
             </div>
         </c:forEach>

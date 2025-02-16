@@ -42,7 +42,7 @@ public class CommentRepository {
     try {
       connection = DatabaseManager.getInstance().getConnection();
       preparedStatement = connection.prepareStatement("""
-          SELECT post_id, content, c.author_id, u.name AS author_name, created_at
+          SELECT c.id, post_id, content, c.author_id, u.name AS author_name, created_at
           FROM comments c
           JOIN user u ON c.author_id = u.id
           WHERE post_id = ?
@@ -57,6 +57,7 @@ public class CommentRepository {
     try {
       while (resultSet.next()) {
         var d = CommentDAO.builder()
+            .id(resultSet.getLong("id"))
             .author_id(resultSet.getLong("author_id"))
             .authorName(resultSet.getString("author_name"))
             .postId(resultSet.getLong("post_id"))
