@@ -5,7 +5,6 @@
 <html>
 <head>
     <title>JSP - Hello World</title>
-    <t:axios/>
     <t:bootstrap/>
     <script>
         function submitButtonClicked(event) {

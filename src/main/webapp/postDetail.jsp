@@ -7,6 +7,30 @@
 <head>
     <title>JSP - Hello World</title>
     <t:bootstrap/>
+    <script>
+        function submitButtonClicked(event) {
+            event.preventDefault();
+            const title = document.getElementById("title").value;
+            const content = document.getElementById("content").value;
+            fetch("<%=request.getContextPath()%>/comment", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: title,
+                    content: content
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Success: ", data);
+                })
+                .catch((error) => {
+                    console.error("Error: ", error);
+                });
+        }
+    </script>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
