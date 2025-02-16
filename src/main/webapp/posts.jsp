@@ -34,7 +34,7 @@
                 <tr>
                     <th scope="row">${post.id}</th>
                     <td><a href="userinfo/${post.authorID}">${post.authorName}</a></td>
-                    <td>${post.title}</td>
+                    <td><a href="posts/${post.id}">${post.title}</a></td>
                     <td>${post.created_at}</td>
                 </tr>
             </c:forEach>
