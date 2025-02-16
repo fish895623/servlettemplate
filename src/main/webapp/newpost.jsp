@@ -24,7 +24,11 @@
             })
                 .then(response => response.json())
                 .then(data => {
+                    /* if status ok {\"status\": \"ok\"}  reponse, then redirect to home page */
                     console.log("Success: ", data);
+                    if (data.status === "ok") {
+                        window.location.href = "<%=request.getContextPath()%>/posts";
+                    }
                 })
                 .catch((error) => {
                     console.error("Error: ", error);

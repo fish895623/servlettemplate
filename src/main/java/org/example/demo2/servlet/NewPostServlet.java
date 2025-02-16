@@ -31,7 +31,7 @@ public class NewPostServlet extends HttpServlet {
   }
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     ObjectMapper objectMapper = new ObjectMapper();
     Post post = objectMapper.readValue(req.getReader(), Post.class);
     User user = (User) req.getSession().getAttribute("user");
@@ -39,8 +39,17 @@ public class NewPostServlet extends HttpServlet {
     log.info("Received post Title: {}", post.getTitle());
     log.info("Received post Content: {}", post.getContent());
 
-    postRepository.savePost(user, post.getTitle(), post.getContent());
+    resp.setContentType("application/json");
+    try {
+      postRepository.savePost(user, post.getTitle(), post.getContent());
+    } catch (Exception e) {
+      log.error("Error saving post", e);
+      resp.setStatus(500);
+      resp.getWriter().write("{\"status\": \"error\"}");
+      return;
+    }
 
-    resp.sendRedirect(req.getContextPath() + "/posts");
+    resp.setStatus(200);
+    resp.getWriter().write("{\"status\": \"ok\"}");
   }
 }
