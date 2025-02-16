@@ -40,11 +40,11 @@
                     <li class="nav-item">
                         <% if (user == null || session.getAttribute("user").equals("false")) {%>
                         <div>
-                            <a class="nav-link" href="login">Login</a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/login">Login</a>
                         </div>
                         <% } else { %>
                         <div>
-                            <a class="nav-link" href="logout">Logout</a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/logout">Logout</a>
                         </div>
                         <% } %>
                     </li>
