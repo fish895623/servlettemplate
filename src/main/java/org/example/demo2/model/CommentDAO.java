@@ -13,9 +13,10 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+public class CommentDAO {
   private Long id;
   private Long author_id;
+  private String authorName;
   private Long postId;
   private String content;
   private Date createdAt;
