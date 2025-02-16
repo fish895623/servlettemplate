@@ -46,6 +46,12 @@
 <main>
     <div class="container">
         <h1>${post.title}</h1>
+        <p class="text-muted">Author:
+            <a href="<%=request.getContextPath()%>/userinfo/${post.authorID}"
+               class="fw-bold text-decoration-none">
+                ${post.authorName}
+            </a>
+        </p>
         <p class="card-text">Write Data ${post.created_at}</p>
         <div class="card">
             <div class="card-body">
