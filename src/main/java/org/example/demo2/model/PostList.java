@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostList extends Post {
+public class PostList {
   private Long id;
   private String authorName;
   private Long authorID;
