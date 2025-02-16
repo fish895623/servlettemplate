@@ -16,12 +16,13 @@ public class CommentRepository {
     try {
       connection = DatabaseManager.getInstance().getConnection();
       preparedStatement = connection.prepareStatement("""
-          INSERT INTO comments (id, post_id, content, created_at, author_id) 
-          VALUE (?, ?, ?, ?, ?)
+          INSERT INTO comments (post_id, content, author_id)
+          VALUE (?, ?, ?)
           """);
-      preparedStatement.setLong(1, comment.getId());
-      preparedStatement.setLong(2, comment.getPostId());
-      preparedStatement.setString(3, comment.getContent());
+      preparedStatement.setLong(1, comment.getPostId());
+      preparedStatement.setString(2, comment.getContent());
+      preparedStatement.setLong(3, comment.getAuthor_id());
+      preparedStatement.executeUpdate();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }

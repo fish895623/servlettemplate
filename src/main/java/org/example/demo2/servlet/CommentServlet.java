@@ -2,6 +2,7 @@ package org.example.demo2.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.demo2.model.Comment;
+import org.example.demo2.model.User;
 import org.example.demo2.repository.CommentRepository;
 
 import javax.servlet.ServletConfig;
@@ -24,9 +25,28 @@ public class CommentServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    resp.setContentType("application/json");
+
     ObjectMapper objectMapper = new ObjectMapper();
     Comment comment = objectMapper.readValue(req.getReader(), Comment.class);
 
-    commentRepository.saveComment(comment);
+    User user = (User) req.getSession().getAttribute("user");
+
+    comment.setAuthor_id(user.getId());
+
+    System.out.println("Received comment: " + comment.getContent() + " from user: " + user.getId());
+
+
+    try {
+      commentRepository.saveComment(comment);
+    } catch (Exception e) {
+      e.printStackTrace();
+      resp.setStatus(500);
+      resp.getWriter().write("{\"status\": \"error\"}");
+      return;
+    }
+
+    resp.setStatus(200);
+    resp.getWriter().write("{\"status\": \"ok\"}");
   }
 }

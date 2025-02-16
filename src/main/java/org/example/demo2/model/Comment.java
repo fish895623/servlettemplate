@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Comment {
   private Long id;
+  private Long author_id;
   private Long postId;
   private String content;
   private Date createdAt;
