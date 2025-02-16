@@ -54,21 +54,11 @@
 
         <h3>Comments</h3>
 
-        <jsp:useBean id="comments" scope="request" type="java.util.List<org.example.demo2.model.CommentDAO>"/>
-        <c:forEach var="comment" items="${comments}">
-            <div class="card mb-3 shadow-sm">
-                <div class="card-body">
-                    <h6 class="card-title">
-                        <a href="<%=request.getContextPath()%>/userinfo/${comment.author_id}" class="fw-bold text-decoration-none">
-                                ${comment.authorName}
-                        </a>
-                    </h6>
-                    <p class="text-muted small">${comment.createdAt}</p>
-                    <p class="card-text">${comment.content}</p>
-                </div>
-            </div>
-        </c:forEach>
-
+        <% if (user == null || session.getAttribute("user").equals("false")) {%>
+        <div class="alert alert-warning" role="alert">
+            Please login to write a comment.
+        </div>
+        <% } else { %>
         <form style="height: 100%" onsubmit="submitButtonClicked(event)">
             <div class="form-group">
                 <label for="content">Content</label>
@@ -77,7 +67,24 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <% } %>
 
+        <%-- NOTE need to change axios to update values. Rerender all data is not good. --%>
+        <jsp:useBean id="comments" scope="request" type="java.util.List<org.example.demo2.model.CommentDAO>"/>
+        <c:forEach var="comment" items="${comments}">
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <a href="<%=request.getContextPath()%>/userinfo/${comment.author_id}"
+                           class="fw-bold text-decoration-none">
+                                ${comment.authorName}
+                        </a>
+                    </h6>
+                    <p class="text-muted small">${comment.createdAt}</p>
+                    <p class="card-text">${comment.content}</p>
+                </div>
+            </div>
+        </c:forEach>
     </div>
 </main>
 </body>
