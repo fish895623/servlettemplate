@@ -36,6 +36,5 @@ public class UserInfoServlet extends HttpServlet {
     } else {
       response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid request");
     }
-
   }
 }

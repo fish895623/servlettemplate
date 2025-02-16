@@ -207,4 +207,47 @@ public class PostRepository {
       throw new RuntimeException(e);
     }
   }
+
+  public PostList getPostByID(String postID) {
+    Connection connection;
+    PreparedStatement preparedStatement;
+    ResultSet resultSet;
+
+    PostList data = new PostList();
+
+    try {
+      connection = DatabaseManager.getInstance().getConnection();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    try {
+      preparedStatement = connection.prepareStatement("""
+          SELECT p.id AS postid, u.id AS userid, u.name, title, content, created_at
+          FROM posts p
+          JOIN user u ON p.author = u.id
+          WHERE p.id = ?
+          ORDER BY created_at DESC
+          """);
+      preparedStatement.setLong(1, Long.parseLong(postID));
+
+      resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        data.setId(resultSet.getLong("postid"));
+        data.setAuthorID(resultSet.getLong("userid"));
+        data.setAuthorName(resultSet.getString("name"));
+        data.setTitle(resultSet.getString("title"));
+        data.setContent(loadContent(resultSet.getString("content")));
+        data.setCreated_at(resultSet.getTimestamp("created_at"));
+      }
+
+      return data;
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+
+  }
 }
