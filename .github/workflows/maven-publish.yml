@@ -26,11 +26,13 @@ jobs:
         with:
           servers: |
             [{
+              "servers": {
               "server": {
                 "id": "RemoteTomcatServer",
                 "username": "admin",
-                "password": "${{ secrets.TOMCAT_PASSWORD }}"
-              }
+                "password": "${{ secrets.TOMCAT_PASSWORD }}",
+                "configurations"
+              }}
             }]
 
       - run: ./mvnw tomcat:redeploy
