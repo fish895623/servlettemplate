@@ -30,6 +30,77 @@ public class PostRepository {
     }
   }
 
+  public List<PostList> getAll(long limit, long offset) {
+    Connection connection;
+    PreparedStatement preparedStatement;
+    ResultSet resultSet;
+    List<PostList> data = new ArrayList<>();
+
+    try {
+      connection = DatabaseManager.getInstance().getConnection();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    try {
+      preparedStatement = connection.prepareStatement("""
+          SELECT p.id AS postid, u.id AS userid, u.name, title, content, created_at
+          FROM posts p
+          JOIN user u ON p.author = u.id
+          ORDER BY created_at DESC
+          LIMIT ? OFFSET ?
+          """);
+      preparedStatement.setLong(1, limit);
+      preparedStatement.setLong(2, offset);
+
+      resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        var val = new PostList();
+        val.setId(resultSet.getLong("postid"));
+        val.setAuthorID(resultSet.getLong("userid"));
+        val.setAuthorName(resultSet.getString("name"));
+        val.setTitle(resultSet.getString("title"));
+        val.setContent(loadContent(resultSet.getString("content")));
+        val.setCreated_at(resultSet.getTimestamp("created_at"));
+
+        data.add(val);
+      }
+
+      return data;
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+  }
+
+  public Long getEndOfPage() {
+    Connection connection;
+    PreparedStatement preparedStatement;
+    ResultSet resultSet;
+
+    try {
+      connection = DatabaseManager.getInstance().getConnection();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    try {
+      preparedStatement = connection.prepareStatement("""
+          SELECT COUNT(*) FROM posts
+          """);
+
+      resultSet = preparedStatement.executeQuery();
+
+      resultSet.next();
+      return resultSet.getLong(1);
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public List<PostList> getAll() {
     Connection connection;
     PreparedStatement preparedStatement;
@@ -63,7 +134,6 @@ public class PostRepository {
 
         data.add(val);
       }
-
 
       return data;
 
@@ -99,7 +169,6 @@ public class PostRepository {
             .content(loadContent(resultSet.getString("content"))).created_at(resultSet.getTimestamp("created_at"))
             .build());
       }
-
 
       return data;
 
@@ -200,7 +269,6 @@ public class PostRepository {
         data.add(val);
       }
 
-
       return data;
 
     } catch (SQLException e) {
@@ -247,7 +315,6 @@ public class PostRepository {
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-
 
   }
 }

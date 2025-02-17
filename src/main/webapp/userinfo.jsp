@@ -26,6 +26,10 @@
         .content {
             margin-left: 220px;
         }
+
+        th {
+            text-transform: capitalize;
+        }
     </style>
     <script>
         function loadData() {
@@ -96,8 +100,10 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Created At</th>
+                        <th scope="col">content</th>
+                        <th scope="col">created at</th>
+                        <th scope="col">post title</th>
+                        <th scope="col">post created at</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -106,6 +112,15 @@
                     <c:forEach var="comment" items="${comments}">
                         <tr>
                             <th scope="row">${comment.id}</th>
+                            <th scope="row">
+                                <a href="<%=request.getContextPath()%>/posts/${comment.postId}">
+                                        ${comment.postTitle}
+                                </a>
+                            </th>
+                            <th scope="row">${comment.postCreatedAt}</th>
+
+                            <th scope="row">${comment.content}</th>
+                            <th scope="row">${comment.createdAt}</th>
                         </tr>
                     </c:forEach>
                     </tbody>
