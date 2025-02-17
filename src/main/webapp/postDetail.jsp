@@ -23,7 +23,6 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    replyCommentId: id,
                     postId: ${post.id},
                     content: content
                 })
