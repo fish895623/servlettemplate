@@ -22,16 +22,24 @@ jobs:
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-      - uses: s4u/maven-settings-action@v3.1.0
+      - name: maven-settings-xml-action
+        uses: whelk-io/maven-settings-xml-action@v22
         with:
-          servers: |
-            [{
-              "servers": {
-              "server": {
-                "id": "RemoteTomcatServer",
+          servers: >
+            [
+              {
+                "id": "some-id",
                 "username": "admin",
-                "password": "${{ secrets.TOMCAT_PASSWORD }}"
-              }}
-            }]
+                "password": "${secrets.TOMCAT_PASSWORD}",
+                "configuration": {
+                  "httpConfiguration": {
+                    "all": {
+                      "usePreemptive": "true"
+                    }
+                  }
+                }
+              }
+            ]
+          output_file: .m2/settings.xml
 
       - run: ./mvnw tomcat:redeploy
