@@ -30,16 +30,25 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
+                    <% if (user != null) { %>
                     <li class="nav-item">
-                        <% if (user != null) { %>
                         <a class="nav-link"
                            aria-current="page"
                            href="<%=request.getContextPath()%>/userinfo/<%=user.getId()%>"
                         >
                             <%=user.getEmail()%>
                         </a>
-                        <% } %>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           aria-current="page"
+                           href="<%=request.getContextPath()%>/mypage/<%=user.getEmail()%>"
+                        >
+                            Profile
+                        </a>
+                    </li>
+                    <% } %>
+
                     <li class="nav-item">
                         <% if (user == null || session.getAttribute("user").equals("false")) {%>
                         <div>
