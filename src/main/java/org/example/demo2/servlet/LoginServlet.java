@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "loginServlet", value = "/login")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends FixedHttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     super.init(config);

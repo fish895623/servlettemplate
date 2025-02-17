@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(value = "/registration")
-public class RegistrationServlet extends HttpServlet {
+public class RegistrationServlet extends FixedHttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

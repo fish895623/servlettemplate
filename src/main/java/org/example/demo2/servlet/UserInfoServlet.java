@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(value = "/userinfo/*")
-public class UserInfoServlet extends HttpServlet {
+public class UserInfoServlet extends FixedHttpServlet {
   PostRepository postRepository;
   CommentRepository commentRepository;
 

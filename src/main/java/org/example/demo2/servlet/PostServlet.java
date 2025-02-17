@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(value = "/posts/*")
-public class PostServlet extends HttpServlet {
+public class PostServlet extends FixedHttpServlet {
   PostRepository postRepository;
   CommentRepository commentRepository;
 

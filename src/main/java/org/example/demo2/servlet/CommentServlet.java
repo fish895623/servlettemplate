@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(value = "/comments")
-public class CommentServlet extends HttpServlet {
+public class CommentServlet extends FixedHttpServlet {
   CommentRepository commentRepository;
 
   @Override

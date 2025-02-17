@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @Slf4j
 @WebServlet(value = "/newpost")
-public class NewPostServlet extends HttpServlet {
+public class NewPostServlet extends FixedHttpServlet {
   private PostRepository postRepository;
 
   @Override

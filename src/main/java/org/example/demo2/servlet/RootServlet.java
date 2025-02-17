@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "totalServlet", value = "/")
-public class RootServlet extends HttpServlet {
+public class RootServlet extends FixedHttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
