@@ -18,6 +18,8 @@ public class CommentDAO {
   private Long author_id;
   private String authorName;
   private Long postId;
+  private String postTitle;
+  private Date postCreatedAt;
   private String content;
   private Date createdAt;
 }

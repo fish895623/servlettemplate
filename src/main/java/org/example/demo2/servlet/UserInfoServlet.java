@@ -1,6 +1,7 @@
 package org.example.demo2.servlet;
 
 import org.example.demo2.model.PostList;
+import org.example.demo2.repository.CommentRepository;
 import org.example.demo2.repository.PostRepository;
 
 import javax.servlet.ServletConfig;
@@ -15,10 +16,13 @@ import java.util.List;
 @WebServlet(value = "/userinfo/*")
 public class UserInfoServlet extends HttpServlet {
   PostRepository postRepository;
+  CommentRepository commentRepository;
+
   @Override
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
     postRepository = new PostRepository();
+    commentRepository = new CommentRepository();
   }
 
   @Override
@@ -28,9 +32,9 @@ public class UserInfoServlet extends HttpServlet {
       String userId = pathInfo.substring(1); // Extracts "1"
       List<PostList> posts = postRepository.getByUserId(userId);
 
-
       request.setAttribute("userId", userId);
       request.setAttribute("posts", posts);
+      request.setAttribute("comments", commentRepository.getCommentsByUserID(Long.valueOf(userId)));
 
       request.getRequestDispatcher("/userinfo.jsp").forward(request, response);
     } else {
