@@ -9,7 +9,8 @@ import java.io.IOException;
 public class FixedHttpServlet extends HttpServlet {
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    super.service(req, resp);
     req.setCharacterEncoding("UTF-8");
+    resp.setCharacterEncoding("UTF-8");
+    super.service(req, resp);
   }
 }
