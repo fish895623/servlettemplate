@@ -30,8 +30,7 @@ jobs:
               "server": {
                 "id": "RemoteTomcatServer",
                 "username": "admin",
-                "password": "${{ secrets.TOMCAT_PASSWORD }}",
-                "configurations"
+                "password": "${{ secrets.TOMCAT_PASSWORD }}"
               }}
             }]
 
