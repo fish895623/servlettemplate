@@ -26,12 +26,10 @@ jobs:
         with:
           servers: |
             [{
-              "id": "RemoteTomcatServer",
-              "username": "admin",
-              "password": "${{ secrets.TOMCAT_PASSWORD }}",
-              "configuration": {
-                "url": "${{ secrets.SERVER }}",
-                "path": "/t2"
+              "server": {
+                "id": "RemoteTomcatServer",
+                "username": "admin",
+                "password": "${{ secrets.TOMCAT_PASSWORD }}"
               }
             }]
 
