@@ -28,9 +28,9 @@ jobs:
           servers: >
             [
               {
-                "id": "some-id",
+                "id": "RemoteTomcatServer",
                 "username": "admin",
-                "password": "${secrets.TOMCAT_PASSWORD}",
+                "password": "${{ secrets.TOMCAT_PASSWORD }}",
                 "configuration": {
                   "httpConfiguration": {
                     "all": {
