@@ -43,5 +43,3 @@ build/
 config.properties
 
 tags
-
-.env

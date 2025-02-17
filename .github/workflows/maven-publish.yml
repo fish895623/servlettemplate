@@ -28,9 +28,9 @@ jobs:
           servers: >
             [
               {
-                "id": "some-id",
+                "id": "RemoteTomcatServer",
                 "username": "admin",
-                "password": "${secrets.TOMCAT_PASSWORD}",
+                "password": "${{ secrets.TOMCAT_PASSWORD }}",
                 "configuration": {
                   "httpConfiguration": {
                     "all": {
@@ -41,5 +41,7 @@ jobs:
               }
             ]
           output_file: .m2/settings.xml
+      - run: |
+          cat .m2/settings.xml
 
       - run: ./mvnw tomcat:redeploy
