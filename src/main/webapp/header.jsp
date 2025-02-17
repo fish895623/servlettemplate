@@ -32,7 +32,10 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <% if (user != null) { %>
-                        <a class="nav-link" aria-current="page">
+                        <a class="nav-link"
+                           aria-current="page"
+                           href="<%=request.getContextPath()%>/userinfo/<%=user.getId()%>"
+                        >
                             <%=user.getEmail()%>
                         </a>
                         <% } %>
