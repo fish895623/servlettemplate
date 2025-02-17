@@ -40,4 +40,29 @@ public class UserRepository {
 
     return data;
   }
+
+  // getUserByEmail ----------------------------------------------------------------
+  // This method is used to get user by email
+  // PARAMETERS: String email
+  // RETURNS: User
+  public User getUserByEmail(String email) throws SQLException {
+    var connection = DatabaseManager.getInstance().getConnection();
+    PreparedStatement preparedStatement = connection.prepareStatement("""
+        SELECT id, email, name, role FROM user WHERE BINARY email = ?
+        """);
+    preparedStatement.setString(1, email);
+
+    ResultSet resultSet = preparedStatement.executeQuery();
+
+    // parse result to User object
+    User tmp = new User();
+    if (resultSet.next()) {
+      tmp.setId(resultSet.getLong("id"));
+      tmp.setEmail(resultSet.getString("email"));
+      tmp.setName(resultSet.getString("name"));
+      tmp.setRole(resultSet.getString("role"));
+    }
+
+    return tmp;
+  }
 }
