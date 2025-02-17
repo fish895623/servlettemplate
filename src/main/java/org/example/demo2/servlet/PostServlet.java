@@ -4,14 +4,16 @@ import org.example.demo2.model.PostList;
 import org.example.demo2.repository.CommentRepository;
 import org.example.demo2.repository.PostRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 @WebServlet(value = "/posts/*")
 public class PostServlet extends FixedHttpServlet {
   PostRepository postRepository;
@@ -37,7 +39,23 @@ public class PostServlet extends FixedHttpServlet {
       req.setAttribute("comments", commentRepository.getCommentsByPostID(Long.parseLong(postID)));
       req.getRequestDispatcher("/postDetail.jsp").forward(req, resp);
     } else {
-      req.setAttribute("posts", postRepository.getAll());
+      String page = req.getParameter("page");
+      Long currentPage = page == null ? 1 : Long.parseLong(page);
+      Long endOfPage = (Long) req.getAttribute("endOfPage");
+      long limit = 10;
+
+      if (page == null) {
+        page = "1";
+      }
+
+      long offset = (Long.parseLong(page) - 1) * limit;
+
+      var pageNumber = postRepository.getEndOfPage();
+
+      log.info("limit {} offset {} pageNumber {}", limit, offset, pageNumber);
+
+      req.setAttribute("endOfPage", pageNumber / limit + 1);
+      req.setAttribute("posts", postRepository.getAll(limit, offset));
       req.getRequestDispatcher("/posts.jsp").forward(req, resp);
     }
   }
