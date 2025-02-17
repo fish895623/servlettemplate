@@ -45,3 +45,4 @@ config.properties
 tags
 
 .env
+.env.*
