@@ -65,4 +65,26 @@ public class UserRepository {
 
     return tmp;
   }
+
+  // updateUser ----------------------------------------------------------------
+  // This method is used to update user
+  // PARAMETERS: User user
+  // RETURNS: boolean
+  public int updateUser(User user) throws SQLException {
+    var connection = DatabaseManager.getInstance().getConnection();
+    PreparedStatement preparedStatement = connection.prepareStatement("""
+        UPDATE USER SET name = ?, role = ? WHERE BINARY email = ?
+        """);
+    preparedStatement.setString(1, user.getName());
+    preparedStatement.setString(2, user.getRole());
+    preparedStatement.setString(3, user.getEmail());
+
+    int result = preparedStatement.executeUpdate();
+
+    if (result == 0) {
+      throw new SQLException("User not found");
+    } else {
+      return result;
+    }
+  }
 }
